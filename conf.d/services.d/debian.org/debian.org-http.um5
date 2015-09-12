@@ -1,0 +1,12 @@
+service debian.org-http {
+    http {
+        url = "http://www.debian.org/";
+        status-code = 200;
+        good-words = "About Debian", "Getting Debian";
+        bad-words = "error";
+    }
+}
+
+bind debian.org-http to tristate-clocked as debian.org-http-target
+
+notify tyrion-lannister of  debian.org-http-target

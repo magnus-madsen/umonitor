@@ -1,0 +1,10 @@
+service localhost-icmp {
+    icmp {
+        host = "localhost";
+    }
+}
+
+bind localhost-icmp to tristate as localhost-icmp-target
+
+notify jamie-lannister of localhost-icmp-target
+notify tyrion-lannister of localhost-icmp-target

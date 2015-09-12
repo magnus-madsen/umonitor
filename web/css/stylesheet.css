@@ -1,0 +1,191 @@
+html {
+    overflow-y: scroll;
+}
+
+body {
+    background-color: #000000;
+    margin: 0;
+}
+
+.app-green {
+    background: url('../img/bg/green.png') repeat-y left top;
+}
+
+.app-yellow {
+    background: url('../img/bg/yellow.png') repeat-y left top;
+}
+
+.app-red {
+    background: url('../img/bg/red.png') repeat-y left top;
+}
+
+.app-grey {
+    background: url('../img/bg/grey.png') repeat-y left top;
+}
+
+.app-grey #page {
+    transform: rotate(-3deg);
+}
+
+.logo {
+    text-shadow: 0.06em 0.06em #444444;
+
+    font-family: "Trebuchet MS", sans-serif;
+    font-weight: normal;
+    font-size: 3em;
+    color: #eeeeee;
+
+    float: left;
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#page {
+    width: 75vw;
+    min-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 20px;
+    transition: all 2s;
+}
+
+#layout {
+    clear: both;
+
+    background-color: #1e1e1e;
+    min-height: 80vh;
+
+    border-radius: 4px;
+    padding: 30px;
+}
+
+#footer {
+    font-family: "Trebuchet MS", sans-serif;
+    font-weight: normal;
+    font-size: 0.85em;
+    color: #666666;
+    text-align: right;
+
+    background-color: rgba(30, 30, 30, 0.75);
+
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+
+    padding: 10px;
+    border-radius: 4px;
+}
+
+#footer a:link, #footer a:hover, #footer a:active, #footer a:visited {
+    color: #666666;
+    text-decoration: none;
+}
+
+#footer a:hover {
+    color: #eeeeee;
+    text-decoration: underline;
+}
+
+a:link, a:visited {
+    color: #777;
+    text-decoration: none;
+}
+
+a:hover, a:active {
+    color: #eee;
+    text-decoration: underline;
+}
+
+table {
+    font-family: "Arial", sans-serif;
+    font-size: 1.0em;
+
+    border-collapse: collapse;
+    width: 100%;
+}
+
+thead td {
+    font-family: "Arial", sans-serif;
+    font-size: 0.7em;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #777;
+
+    padding-top: 0;
+    padding-bottom: 12px;
+}
+
+tbody td {
+    font-family: "Arial", sans-serif;
+    font-size: 0.8em;
+    color: #eee;
+
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.column-status {
+    width: 8%;
+    text-align: center;
+}
+
+.column-name {
+    width: 20%;
+}
+
+.column-transition {
+    width: 20%;
+    color: #777;
+}
+
+.column-time {
+    width: 20%;
+    color: #777;
+}
+
+.column-message {
+    color: #777;
+}
+
+.filter {
+    float: right;
+    margin-top: 56px;
+    width: 300px;
+    padding: 8px;
+
+    background-color: #1e1e1e;
+    border: 0;
+    border-radius: 3px;
+
+    color: #eee;
+}
+
+.reset {
+    float: right;
+    margin-top: 56px;
+    padding: 8px;
+
+    background-color: #1e1e1e;
+    border: 0;
+    border-radius: 3px;
+
+    color: #777;
+
+    margin-left: 10px;
+}
+
+.filter:focus {
+    outline: 0;
+}
+
+.up {
+    color: #00c600;
+}
+
+.dn {
+    color: #c60000;
+}

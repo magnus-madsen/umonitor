@@ -1,0 +1,18 @@
+monitor tristate {
+    states {
+        Init, Online, Offline
+    }
+
+    when Init {
+        Up(self) -> Online
+        Dn(self) -> Offline
+    }
+
+    when Online {
+        Dn(self) -> Offline @@ notify-offline
+    }
+
+    when Offline {
+        Up(self) -> Online @@ notify-online
+    }
+}

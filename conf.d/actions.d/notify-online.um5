@@ -1,0 +1,5 @@
+action notify-online {
+    run {
+        exec = "notify-online.py", "$service-name", "$contact-emails";
+    }
+}

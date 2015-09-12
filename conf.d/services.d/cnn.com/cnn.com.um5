@@ -1,0 +1,17 @@
+service cnn.com-http {
+    allOf {
+        http {
+            url = "http://www.cnn.com/";
+        }
+        http {
+            url = "http://www.cnn.com/us";
+        }
+        http {
+            url = "http://www.cnn.com/world";
+        }
+    }
+}
+
+bind cnn.com-http to tristate as cnn.com-http-target
+
+notify jamie-lannister of cnn.com-http-target

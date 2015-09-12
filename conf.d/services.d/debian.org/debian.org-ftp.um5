@@ -1,0 +1,15 @@
+service debian.org-ftp {
+    allOf {
+        ftp {
+            host = "ftp.debian.org";
+        }
+        ftp {
+            host = "ftp.de.debian.org";
+        }
+        ftp {
+            host = "ftp.uk.debian.org";
+        }
+    }
+}
+
+bind debian.org-ftp to tristate-business-hours as debian.org-ftp-target

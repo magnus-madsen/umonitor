@@ -1,0 +1,24 @@
+monitor tristate-clocked {
+    states {
+        Init, Online, Offline
+    }
+
+    clocks {
+        Uptime, Downtime
+    }
+
+    when Init {
+        Up(self) -> Online !! Downtime
+        Dn(self) -> Offline !! Uptime
+    }
+
+    when Online {
+        Up(self) -> Online !! Downtime
+        Dn(self) if (Downtime > 5min) -> Offline !! Uptime @@ notify-offline
+    }
+
+    when Offline {
+        Up(self) if (Uptime > 5min) -> Online !! Downtime @@ notify-online
+        Dn(self) -> Offline !! Uptime
+    }
+}

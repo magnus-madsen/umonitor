@@ -1,0 +1,18 @@
+monitor tristate-business-hours {
+    states {
+        Init, Online, Offline
+    }
+
+    when Init {
+        Up(self) -> Online
+        Dn(self) -> Offline
+    }
+
+    when Online {
+        Dn(self) if (on Mon, Tue, Wed, Thu, Fri, at 8.00am to 5.00pm)-> Offline @@ notify-offline
+    }
+
+    when Offline {
+        Up(self) -> Online @@ notify-online
+    }
+}

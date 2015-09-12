@@ -1,0 +1,58 @@
+// this file contains lots of errors
+
+// duplicated action
+action dup-action {}
+action dup-action {}
+
+// duplicated contact
+contact dup-contact {}
+contact dup-contact {}
+
+// duplicated monitor
+monitor dup-monitor { states { A } }
+monitor dup-monitor { states { A } }
+
+// duplicated service
+service dup-service { icmp { host = "127.0.0.1"; } }
+service dup-service { icmp { host = "127.0.0.1"; } }
+
+// duplicate property
+contact contact-with-dup-property {
+    phone = "12345678";
+    phone = "12345678";
+}
+
+// missing property value
+service service-with-missing-property {
+    http { } ;
+}
+
+// illegal property value
+service service-with-illegal-property {
+    http {
+        url = 123;
+    }
+}
+
+// monitor with no states
+monitor a-valid-monitor { }
+
+// bind <<service>> to <<monitor>> as <<target>>
+monitor a-valid-monitor { states { A } }
+service a-valid-service { icmp { host = "127.0.0.1"; } }
+contact a-valid-contact {  }
+
+// bind a non-existing service
+bind non-existing-service to a-valid-monitor as target1
+
+// bind a non-existing monitor
+bind a-valid-service to non-existing-monitor as target2
+
+// notify <<contact>> of <<monitor>>
+bind a-valid-service to a-valid-monitor as a-valid-target
+
+// notify a non-existing contact
+notify non-existing-contact of a-valid-target
+
+// notify a contact of a non-existing target
+notify a-valid-contact of non-existing-target
