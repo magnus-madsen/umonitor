@@ -287,7 +287,7 @@ class Parser(val input: ParserInput, val path: Option[Path] = None) extends org.
   /** Properties                                                            ***/
   /** *************************************************************************/
   def Property: Rule1[Ast.Property] = rule {
-    Ident ~ optWS ~ "=" ~ optWS ~ Literal ~ optWS ~ ";" ~ optWS ~> Ast.Property
+    Ident ~ optWS ~ "=" ~ optWS ~ Literal ~ optSC ~> Ast.Property
   }
 
   def PropertyBody: Rule1[Seq[Ast.Property]] = rule {

@@ -1,5 +1,5 @@
 action notify-offline {
     run {
-        exec = "notify-offline.py", "$service-name", "$contact-emails";
+        exec = "notify-offline.py", "$service-name", "$contact-emails"
     }
 }

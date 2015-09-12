@@ -1,13 +1,13 @@
 service cnn.com-http {
     allOf {
         http {
-            url = "http://www.cnn.com/";
+            url = "http://www.cnn.com/"
         }
         http {
-            url = "http://www.cnn.com/us";
+            url = "http://www.cnn.com/us"
         }
         http {
-            url = "http://www.cnn.com/world";
+            url = "http://www.cnn.com/world"
         }
     }
 }

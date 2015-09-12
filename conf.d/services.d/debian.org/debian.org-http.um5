@@ -1,9 +1,9 @@
 service debian.org-http {
     http {
-        url = "http://www.debian.org/";
-        status-code = 200;
-        good-words = "About Debian", "Getting Debian";
-        bad-words = "error";
+        url = "http://www.debian.org/"
+        status-code = 200
+        good-words = "About Debian", "Getting Debian"
+        bad-words = "error"
     }
 }
 

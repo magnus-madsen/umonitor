@@ -1,6 +1,6 @@
 service localhost-icmp {
     icmp {
-        host = "localhost";
+        host = "localhost"
     }
 }
 

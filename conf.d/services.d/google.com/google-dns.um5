@@ -1,14 +1,14 @@
 service google-dns {
     oneOf {
         dns {
-            host = "8.8.4.4";
-            domain = "www.kernel.org";
-            address = "199.204.44.194";
+            host = "8.8.4.4"
+            domain = "www.kernel.org"
+            address = "199.204.44.194"
         }
         dns {
-            host = "8.8.8.8";
-            domain = "www.kernel.org";
-            address = "199.204.44.194";
+            host = "8.8.8.8"
+            domain = "www.kernel.org"
+            address = "199.204.44.194"
         }
     }
 }

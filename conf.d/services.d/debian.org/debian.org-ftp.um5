@@ -1,13 +1,13 @@
 service debian.org-ftp {
     allOf {
         ftp {
-            host = "ftp.debian.org";
+            host = "ftp.debian.org"
         }
         ftp {
-            host = "ftp.de.debian.org";
+            host = "ftp.de.debian.org"
         }
         ftp {
-            host = "ftp.uk.debian.org";
+            host = "ftp.uk.debian.org"
         }
     }
 }

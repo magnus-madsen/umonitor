@@ -1,4 +1,4 @@
 contact tyrion-lannister {
-    email = "t.lannister@casterly.rock";
-    phone = "12345678";
+    email = "t.lannister@casterly.rock"
+    phone = "12345678"
 }
