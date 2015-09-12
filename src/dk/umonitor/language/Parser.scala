@@ -52,8 +52,6 @@ object Parser {
  */
 class Parser(val input: ParserInput, val path: Option[Path] = None) extends org.parboiled2.Parser {
 
-  // TODO: Improve use of semicolon.
-
   /**
    * The start non-terminal.
    */
