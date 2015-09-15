@@ -3,7 +3,7 @@
  *
  * This file is part of the uMonitor project.
  *
- * Source code available on the MIT license. See LICENSE.md for details.
+ * Source code available under the MIT license. See LICENSE.md for details.
  */
 
 package dk.umonitor.language

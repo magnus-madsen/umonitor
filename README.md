@@ -274,7 +274,7 @@ An action is attached to a transition with the `@@` operator, like so:
 
 ```
 when Online {
-    Dn(self) -> Online @@ notify-offline
+    Dn(self) -> Offline @@ notify-offline
 }
 ```
 
