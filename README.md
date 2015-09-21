@@ -21,6 +21,8 @@ Grab the jar file from the release page and run:
 
 where `conf.d` is a directory containing your configuration files.
 
+Then open a web browser and navigate to `localhost:8025`.
+
 ## Configuration ##
 The major components of uMonitor are the `service` and `monitor` declarations.
 These make use of the `action` and `contact` declarations. 
