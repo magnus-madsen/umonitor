@@ -46,9 +46,16 @@ object Main {
         val server = new RestServer
         server.start()
 
+        // add shutdown hook to warn about shutdown.
+        Runtime.getRuntime.addShutdownHook(new Thread(new Runnable {
+          def run(): Unit = printShutdownWarning()
+        }))
+
         // start the interactive shell.
+        // NB: control never continues past this call.
         val shell = new Shell(program)
         shell.startAndAwait()
+
       case Failure(errors) =>
         // print any errors to the console.
         errors.reverse.foreach(e => println(e.format))
@@ -58,6 +65,26 @@ object Main {
         System.exit(1)
     }
 
+  }
+
+  /**
+   * Prints a warning that uMonitor is shutting down.
+   */
+  private def printShutdownWarning(): Unit = {
+    Console.println()
+    Console.println("################################################################################")
+    Console.println("###                                                                          ###")
+    Console.println("###      WARNING. WARNING. WARNING. WARNING. WARNING. WARNING. WARNING.      ###")
+    Console.println("###                                                                          ###")
+    Console.println("###      SHUTTING DOWN. MONITORING WILL BE UNAVAILABLE. SHUTTING DOWN.       ###")
+    Console.println("###      SHUTTING DOWN. MONITORING WILL BE UNAVAILABLE. SHUTTING DOWN.       ###")
+    Console.println("###      SHUTTING DOWN. MONITORING WILL BE UNAVAILABLE. SHUTTING DOWN.       ###")
+    Console.println("###                                                                          ###")
+    Console.println("###      DID YOU ACCIDENTALLY PRESS CTRL+C ???                               ###")
+    Console.println("###                                                                          ###")
+    Console.println("###      WARNING. WARNING. WARNING. WARNING. WARNING. WARNING. WARNING.      ###")
+    Console.println("###                                                                          ###")
+    Console.println("################################################################################")
   }
 
 }
