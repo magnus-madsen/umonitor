@@ -11,6 +11,7 @@ package dk.umonitor.util
 import java.io.{ByteArrayOutputStream, IOException}
 import java.net.InetSocketAddress
 import java.time.ZoneId
+import java.util.concurrent.Executors
 
 import com.sun.net.httpserver.{HttpExchange, HttpHandler, HttpServer}
 import dk.umonitor.language.Program._
@@ -46,10 +47,10 @@ class RestServer(implicit ctx: Context) {
 
     // JavaScript
     "/web/js/app.js",
-    "/web/js/lib/jquery.js",
-    "/web/js/lib/lodash.js",
-    "/web/js/lib/moment.js",
-    "/web/js/lib/react.js"
+    "/web/js/lib/jquery.min.js",
+    "/web/js/lib/lodash.min.js",
+    "/web/js/lib/moment.min.js",
+    "/web/js/lib/react.min.js"
   )
 
   /**
@@ -201,8 +202,10 @@ class RestServer(implicit ctx: Context) {
     // mount file handler.
     server.createContext("/", new FileHandler())
 
+    // ensure that multiple threads are used.
+    server.setExecutor(Executors.newCachedThreadPool())
+
     // start server.
-    server.setExecutor(null)
     server.start()
   } catch {
     case e: IOException =>
