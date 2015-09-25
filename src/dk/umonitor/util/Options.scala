@@ -26,7 +26,7 @@ object Options {
       Logging(severity = Severity.Info,
         path = Some(Paths.get("umonitor.log")),
         stream = Some(Console.out),
-        limit = 1000)
+        limit = 10 * 1000)
   )
 }
 

@@ -53,9 +53,13 @@ class Producer(program: Program)(implicit ctx: Context) {
       // construct a runnable instance.
       val r = new Runnable {
         def run(): Unit = try {
-          ctx.queue.put(connect(service.name, service.connector))
+          val event = connect(service.name, service.connector)
+          ctx.queue.put(event)
+          ctx.history.notifyEvent(event)
         } catch {
-          case e: Exception => e.printStackTrace()
+          case e: Exception =>
+            logger.error(s"Unexpected exception.", e)
+            e.printStackTrace()
         }
       }
 

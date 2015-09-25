@@ -17,11 +17,13 @@ class History(limit: Int) {
   /**
    * Tracks the last n events.
    */
+  @volatile
   private var events = List.empty[Event]
 
   /**
    * Tracks the last transitions.
    */
+  @volatile
   private var transitions: Map[String, (Event, State, State)] = Map.empty
 
   /**
@@ -60,9 +62,9 @@ class History(limit: Int) {
   def getTotalNumberOfEvents: Int = getNumberOfUpEvents + getNumberOfDnEvents
 
   /**
-   * Notifies that the given event `e` has occured.
+   * Notifies that the given event `e` has occurred.
    */
-  def notifyEvent(e: Event): Unit = {
+  def notifyEvent(e: Event): Unit = synchronized {
     events = (e :: events).take(limit)
 
     e match {
@@ -78,7 +80,7 @@ class History(limit: Int) {
   /**
    * Notifies that the given transition has occured.
    */
-  def notifyTransition(name: String, event: Event, src: State, dst: State): Unit = {
+  def notifyTransition(name: String, event: Event, src: State, dst: State): Unit = synchronized {
     transitions += (name ->(event, src, dst))
   }
 

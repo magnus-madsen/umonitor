@@ -71,7 +71,7 @@ class Consumer(program: Program)(implicit ctx: Context) extends Thread {
         handleEvent(e)
       } catch {
         case e: Exception =>
-          logger.error(s"Unexpected error handling event: '$e'.", e)
+          logger.error(s"Unexpected exception.", e)
           e.printStackTrace()
       }
     }
@@ -81,8 +81,6 @@ class Consumer(program: Program)(implicit ctx: Context) extends Thread {
    * Handles the given event `e` by taking all valid transitions in all targets.
    */
   def handleEvent(e: Event): Unit = {
-    ctx.history.notifyEvent(e)
-
     // loop through all targets.
     for (target <- program.targets) {
 

@@ -10,6 +10,7 @@ package dk.umonitor.runtime
 
 import java.nio.file.{Files, Paths}
 import java.time.ZoneOffset
+import java.util.concurrent.Executors
 
 import dk.umonitor.language.Program
 import dk.umonitor.language.Program.{Action, Run}
@@ -19,6 +20,11 @@ import scala.collection.convert.decorateAsJava._
 class Executor(program: Program)(implicit ctx: Context) {
 
   private val logger = ctx.logger.getLogger(getClass)
+
+  /**
+   * A thread pool in which actions execute.
+   */
+  val pool = Executors.newCachedThreadPool()
 
   /**
    * Executes all the given `actions` triggered by the given `event`.
@@ -33,8 +39,10 @@ class Executor(program: Program)(implicit ctx: Context) {
    * Executes all runs associated with the given `action` triggered by the given `event` for the given `target`.
    */
   def exec(action: Action, event: Event, target: Program.Target): Unit = {
-    for (run <- action.run) {
-      exec(run, event, target)
+    for (r <- action.run) {
+      pool.submit(new Runnable {
+        def run(): Unit = exec(r, event, target)
+      })
     }
   }
 
