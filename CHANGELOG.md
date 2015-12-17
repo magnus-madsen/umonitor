@@ -2,7 +2,7 @@
 
 ## [5.0.2] - 2015-12-17 ##
 - All logs now saved as ".txt".
-
+- Catch ConnectionClosedException and UncheckedIOException in HttpConnector.
 
 ## [5.0.1] - 2015-09-24 ##
 - Improved parsing of semicolons.

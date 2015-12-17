@@ -8,13 +8,13 @@
 
 package dk.umonitor.runtime.connector
 
-import java.io.{BufferedReader, IOException, InputStreamReader}
+import java.io.{UncheckedIOException, BufferedReader, IOException, InputStreamReader}
 import java.nio.charset.Charset
 import java.time.LocalDateTime
 
 import dk.umonitor.runtime.Event
 import dk.umonitor.util.PropertyMap
-import org.apache.http.ProtocolException
+import org.apache.http.{ConnectionClosedException, ProtocolException}
 import org.apache.http.client.ClientProtocolException
 import org.apache.http.client.config.RequestConfig
 import org.apache.http.client.methods.HttpGet
@@ -103,7 +103,9 @@ object HttpConnector {
     } catch {
       case ex: ClientProtocolException => Event.Dn(name, LocalDateTime.now(), "Http Protocol Error: " + ex.getMessage, Some(ex));
       case ex: ProtocolException => Event.Dn(name, LocalDateTime.now(), "Http Protocol Error: " + ex.getMessage, Some(ex));
+      case ex: ConnectionClosedException => Event.Dn(name, LocalDateTime.now(), "Http Protocol Error: " + ex.getMessage, Some(ex));
       case ex: IOException => Event.Dn(name, LocalDateTime.now(), "I/O Error: " + ex.getMessage, Some(ex));
+      case ex: UncheckedIOException => Event.Dn(name, LocalDateTime.now(), "I/O Error: " + ex.getMessage, Some(ex));
     } finally {
       if (client != null) {
         client.close()
