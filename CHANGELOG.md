@@ -4,6 +4,7 @@
 - All logs now saved as ".txt".
 - Catch ConnectionClosedException and UncheckedIOException in HttpConnector.
 - Use first available port for REST server.
+- Improved parsing of semicolons.
 - Changed license to Apache 2.0
 
 ## [5.0.1] - 2015-09-24 ##

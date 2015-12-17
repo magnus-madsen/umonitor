@@ -114,7 +114,7 @@ class Parser(val input: ParserInput, val path: Option[Path] = None) extends org.
   }
 
   def When: Rule1[Ast.Monitor.When] = rule {
-    atomic("when") ~ optWS ~ Ident ~ optWS ~ "{" ~ optWS ~ zeroOrMore(Transition).separatedBy(WS) ~ optSC ~ "}" ~ optWS ~> Ast.Monitor.When
+    atomic("when") ~ optWS ~ Ident ~ optWS ~ "{" ~ optWS ~ zeroOrMore(Transition).separatedBy(optWS) ~ optSC ~ "}" ~ optWS ~> Ast.Monitor.When
   }
 
   /** *************************************************************************/
@@ -192,7 +192,7 @@ class Parser(val input: ParserInput, val path: Option[Path] = None) extends org.
   /** Transitions                                                           ***/
   /** *************************************************************************/
   def Transition: Rule1[Ast.Transition] = rule {
-    Event ~ Condition ~ "->" ~ optWS ~ Ident ~ Resets ~ Actions ~> Ast.Transition
+    Event ~ Condition ~ "->" ~ optWS ~ Ident ~ Resets ~ Actions ~ optSC ~> Ast.Transition
   }
 
   def Event: Rule1[Ast.Event] = rule {
