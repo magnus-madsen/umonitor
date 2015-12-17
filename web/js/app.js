@@ -5,7 +5,7 @@
 /**
  * The URL where the JSON api is available.
  */
-var URL = "http://" + window.location.hostname + ":8025/api/status";
+var URL = "http://" + window.location.host + "/api/status";
 
 /**
  * How frequently to update the page in seconds.

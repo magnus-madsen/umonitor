@@ -17,7 +17,7 @@
 package dk.umonitor.util
 
 import java.io.{ByteArrayOutputStream, IOException}
-import java.net.InetSocketAddress
+import java.net.{BindException, InetSocketAddress}
 import java.time.ZoneId
 import java.util.concurrent.Executors
 
@@ -30,6 +30,16 @@ import org.json4s.native.JsonMethods
 class RestServer(implicit ctx: Context) {
 
   private val logger = ctx.logger.getLogger(getClass)
+
+  /**
+    * The minimum port number to bind to.
+    */
+  val MinPort = 8000
+
+  /**
+    * The maximum port number to bind to.
+    */
+  val MaxPort = 8100
 
   /**
    * A collection of static resources included in the Jar.
@@ -198,11 +208,12 @@ class RestServer(implicit ctx: Context) {
   /**
    * Bootstraps the internal http server.
    */
-  def start(): Unit = try {
+  def start(): InetSocketAddress = try {
     logger.trace("Starting WebServer.")
 
-    // bind to the requested port.
-    val server = HttpServer.create(new InetSocketAddress(ctx.options.http.port), 0)
+    // initialize server.
+    val server = newServer(MinPort, MaxPort)
+    val port = server.getAddress.getPort
 
     // mount ajax handlers.
     server.createContext("/api/status", new StateHandler())
@@ -215,9 +226,30 @@ class RestServer(implicit ctx: Context) {
 
     // start server.
     server.start()
+
+    // return the address bound to.
+    server.getAddress
   } catch {
     case e: IOException =>
       logger.error(s"Unable to start web server. The REST API will not be available. Error: ${e.getMessage}", e)
+      new InetSocketAddress(0)
+  }
+
+  /**
+    * Returns a new HttpServer bound to a port between the given `minPort` and `maxPort`.
+    */
+  private def newServer(minPort: Int, maxPort: Int): HttpServer = {
+    assert(minPort <= maxPort)
+
+    for (port <- minPort to maxPort) {
+      try {
+        return HttpServer.create(new InetSocketAddress(port), 0)
+      } catch {
+        case e: BindException => // nop - try next port.
+      }
+    }
+
+    throw new IOException(s"Unable to find an available port between $minPort and $maxPort.")
   }
 
 }

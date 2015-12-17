@@ -27,9 +27,6 @@ object Options {
     producer =
       Producer(threads = 50, period = 60),
 
-    http =
-      Http(port = 8025),
-
     logging =
       Logging(severity = Severity.Info,
         path = Some(Paths.get("umonitor.txt")),
@@ -41,7 +38,7 @@ object Options {
 /**
  * Options for uMonitor5.
  */
-case class Options(producer: Producer, http: Http, logging: Logging)
+case class Options(producer: Producer, logging: Logging)
 
 /**
  * Options for the event producer.
@@ -50,11 +47,6 @@ case class Options(producer: Producer, http: Http, logging: Logging)
  * @param period the period between running each service (seconds).
  */
 case class Producer(threads: Int, period: Int)
-
-/**
- * Options for the embedded web server.
- */
-case class Http(port: Int)
 
 /**
  * Options for logging.

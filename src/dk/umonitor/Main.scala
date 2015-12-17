@@ -52,7 +52,7 @@ object Main {
 
         // start the web server for the REST api.
         val server = new RestServer
-        server.start()
+        val address = server.start()
 
         // add shutdown hook to warn about shutdown.
         Runtime.getRuntime.addShutdownHook(new Thread(new Runnable {
@@ -61,7 +61,7 @@ object Main {
 
         // start the interactive shell.
         // NB: control never continues past this call.
-        val shell = new Shell(program)
+        val shell = new Shell(program, address)
         shell.startAndAwait()
 
       case Failure(errors) =>

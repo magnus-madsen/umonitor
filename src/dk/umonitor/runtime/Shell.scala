@@ -16,6 +16,7 @@
 
 package dk.umonitor.runtime
 
+import java.net.InetSocketAddress
 import java.time._
 import java.time.format.DateTimeFormatter
 
@@ -107,7 +108,7 @@ object Shell {
 /**
  * An interactive shell.
  */
-class Shell(program: Program)(implicit ctx: Context) {
+class Shell(program: Program, address: InetSocketAddress)(implicit ctx: Context) {
 
   val dateTimeFormatter = DateTimeFormatter.ofPattern("yyy-MM-dd HH:mm")
   val uptime = LocalDateTime.now()
@@ -340,6 +341,8 @@ class Shell(program: Program)(implicit ctx: Context) {
     val version = Version.currentVersion.major + "." + Version.currentVersion.minor + "." + Version.currentVersion.revision
     Console.println(s"Welcome to uMonitor5 (version $version). Copyright 2015 Magnus Madsen.")
     Console.println(s"This is open source software. Please see LICENSE.md for full details.")
+    Console.println()
+    Console.println(s"Web-interface available at: http://localhost:${address.getPort}/")
     Console.println()
     Console.println(s"Enter a command. Type `help' for information. Type `shutdown' to terminate.")
     Console.flush()
