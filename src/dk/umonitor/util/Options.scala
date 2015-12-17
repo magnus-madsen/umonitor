@@ -24,7 +24,7 @@ object Options {
 
     logging =
       Logging(severity = Severity.Info,
-        path = Some(Paths.get("umonitor.log")),
+        path = Some(Paths.get("umonitor.txt")),
         stream = Some(Console.out),
         limit = 10 * 1000)
   )
