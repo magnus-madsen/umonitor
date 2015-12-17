@@ -23,7 +23,7 @@ object Version {
   /**
    * Returns the current version of the software.
    */
-  val currentVersion: Version = Version(5, 0, 1)
+  val currentVersion: Version = Version(5, 0, 2)
 }
 
 /**

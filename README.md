@@ -9,7 +9,7 @@ runs on the Java Virtual Machine (JVM)
 and comes packaged as a single executable jar.
 The jar is compiled for Java 1.8 and is tested on Linux and Windows.
 
-The source code and binaries are freely available under the MIT license 
+The source code and binaries are freely available under the Apache 2.0 license
 which does not restrict commercial nor private use.
 
 ## Installation ##
@@ -21,7 +21,9 @@ Grab the jar file from the release page and run:
 
 where `conf.d` is a directory containing your configuration files.
 
-Then open a web browser and navigate to `localhost:8025`.
+Then open a web browser and navigate to `localhost:8000`.
+If you have another service running on port `8000` then uMonitor
+will pick the first available port between `8000` and `8100`.
 
 ## Configuration ##
 The major components of uMonitor are the `service` and `monitor` declarations.
@@ -86,7 +88,7 @@ service example.com-http-and-ftp-service {
 
 The `allOf` combinator generates an `up` event when _every_ nested connector generates an `up` event.
 In contrast, the `oneOf` combinator generates an `up` event when _at least one_ nested connector generates an `up` event.
-The `allOf` and `oneOf` connectors can be arbitrarily nested.
+The `allOf` and `oneOf` connectors can also be nested.
 
 ## Monitors ##
 A `monitor` declaration defines a small state machine used to track the status of one or more services.
@@ -156,7 +158,7 @@ monitor www.example.com {
 bind www.example.com to as www.example.com as www.example.com
 ```
 
-Note that the `bind` declaration is necessary.
+**Note that the `bind` declaration is necessary.**
 
 ### Clocks and Time Guards ###
 Transitions, i.e. changing from one state to another, can be guarded by clock and time guards.
@@ -245,7 +247,7 @@ monitor a-guarded-monitor {
 ```
 
 In this monitor, 
-if the the weekday is either monday or wednesday and the time is between seven in the morning and eight thirty in the evening, 
+if the weekday is either monday or wednesday and the time is between seven in the morning and eight thirty in the evening,
 then a `Dn` event will transition to the `Online` state. 
 At all other times, the second transition takes effect and a `Down` event will transition to the `Offline` state.
 
@@ -352,7 +354,7 @@ notify john-doe of www.example.com
 | read-timeout    | the timeout when reading (in msec).                 | Int         | Optional |
 | user-agent      | the user-agent sent to the http server.             | String      | Optional |
 | keep-alive      | whether to enable keep-alive                        | Boolean     | Optional |
-| charset         | default charset, if no charset is provided.         | String      | Required |
+| charset         | default charset, if no charset is provided.         | String      | Optional |
 
 #### ICMP Connector ####
 | Property        | Semantics                                           | Type        | Opt/Req? |
